@@ -45,4 +45,9 @@ class LoginController extends Controller
             ], 422);
           }
     }
+
+    public function logout(Request $request) {
+        auth()->user()->tokens()->delete();
+        return \response('Logged out', 200);
+    }
 }

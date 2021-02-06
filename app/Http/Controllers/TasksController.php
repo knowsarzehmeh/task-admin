@@ -21,8 +21,8 @@ class TasksController extends Controller
 
     public function store(Request $request) {
       $task = $request->validate([
-            'title' => 'string|required',
-            'description' => 'string|required'
+            'title' => 'string|required|min:3',
+            'description' => 'string|required|min:3'
         ]);
 
         // Create task
@@ -33,8 +33,8 @@ class TasksController extends Controller
 
     public function update(Request $request,Task $task) {
         $updatedTask = $request->validate([
-            'title' => 'string|required',
-            'description' => 'string|required',
+            'title' => 'string|required|min:3',
+            'description' => 'string|required|min:3',
             'completed' => 'boolean|required'
         ]);
         

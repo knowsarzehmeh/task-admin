@@ -30,4 +30,6 @@ Route::middleware('auth:sanctum')->group(function() {
    Route::post('/task', [TasksController::class, 'store']); 
    Route::patch('/task/{task}', [TasksController::class, 'update']); 
    Route::delete('/task/{task}', [TasksController::class, 'destroy']); 
+
+   Route::get('/logout', [LoginController::class, 'logout']);
 });
