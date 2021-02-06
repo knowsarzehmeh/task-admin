@@ -19,7 +19,7 @@ use App\Http\Controllers\Auth\LoginController;
 
 Route::post('/register', [LoginController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/register', [LoginController::class, 'register']);
+
 
 Route::middleware('auth:api')->group(function() {
 
