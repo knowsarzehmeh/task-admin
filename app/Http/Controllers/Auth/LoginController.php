@@ -48,7 +48,7 @@ class LoginController extends Controller
 
 
 
-    public function register(Request $request) {
+    public function signup(Request $request) {
         $data = $request->validate([
             'username' => 'string|required|unique:users|min:3',
             'name' => 'string|required|min:3',
