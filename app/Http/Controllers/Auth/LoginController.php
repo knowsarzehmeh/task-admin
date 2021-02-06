@@ -30,7 +30,7 @@ class LoginController extends Controller
             if ( !Hash::check($request->password, $user->password, [])) {
                throw new \Exception('Error in Login');
             }
-            $tokenResult = $user->createToken('authToken')->plainTextToken;
+            $tokenResult = $user->createToken('authToken')->accessToken;
 
             return response()->json([
               'status_code' => 200,
@@ -44,6 +44,25 @@ class LoginController extends Controller
               'error' => $error,
             ], 422);
           }
+    }
+
+
+
+    public function register(Request $request) {
+        $data = $request->validate([
+            'username' => 'string|required|unique:users|min:3',
+            'name' => 'string|required|min:3',
+            'password' => 'string|required|confirmed'
+        ]);
+
+        $user = User::create($data);
+
+        $accessToken = $user->createToken('authToken')->accessToken;
+
+        return response([
+            'user' => $user,
+            'access_token' => $accessToken
+        ]);
     }
 
     public function logout(Request $request) {
