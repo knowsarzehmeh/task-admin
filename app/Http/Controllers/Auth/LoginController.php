@@ -69,4 +69,30 @@ class LoginController extends Controller
         auth()->user()->tokens()->delete();
         return \response('Logged out', 200);
     }
+
+    public function register(Request $request) {
+      
+      $request->validate(
+        [
+            'name' => 'required|max:60',
+            'username' => 'required|max:60',
+            'email' => 'required'
+        ]
+    );
+
+    $user = Admin::create([
+      'name' => trim($request->input('name')),
+      'email' => trim($request->input('email')),
+      'password' => Hash::make(trim($request->input('password')))
+    ]);
+
+   return response()->json([
+      'status_code' => 200,
+      'message' => 'User registered',
+      'data' => $user,
+    ], 200);
+
+  }
+
+
 }
